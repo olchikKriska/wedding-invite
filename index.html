@@ -2,50 +2,154 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- Важно для телефона: масштабирование -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Приглашение</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Свадебное приглашение</title>
     <style>
-        /* Сброс отступов */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Полный сброс */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: #fdf6f0; /* Цвет фона, если картинка не догрузилась */
+            background: #FEF9F6; /* Ваш цвет фона */
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
+
+        /* Контейнер как экран телефона */
         .container {
-            max-width: 420px; /* Ограничиваем ширину, как в телефоне */
+            max-width: 420px; /* Можно поменять на 390–480px под свой вкус */
             width: 100%;
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background: #FEF9F6; /* Чтобы совпадало с фоном картинок */
+            overflow: hidden;
+            position: relative;
         }
-        img {
+
+        /* Все картинки идеально вписываются в ширину */
+        .container img {
             width: 100%;
             height: auto;
-            display: block; /* Убирает лишний отступ снизу */
+            display: block;
+            vertical-align: bottom;
         }
-        /* Это будущая зона для кнопок, пока она скрыта, но готова */
+
+        /* Плавный скролл */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ========== БУДУЩИЕ КНОПКИ ========== */
+        /* Пока скрыты. Чтобы включить — поменяйте display: none на display: flex */
         .actions {
-            padding: 20px;
-            text-align: center;
-            display: none; /* Чтобы кнопки не висели пустые. Когда понадобятся - поменяем на flex */
+            padding: 20px 25px 30px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            background: #FEF9F6;
         }
-        /* Красивый скролл (плавный переход) */
-        html { scroll-behavior: smooth; }
+
+        .actions a {
+            display: block;
+            padding: 14px 20px;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: #e8c4b8; /* Нежный розовый — можете поменять */
+            color: #5a3f3a;
+            box-shadow: 0 4px 12px rgba(232, 196, 184, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 6px rgba(232, 196, 184, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #b08a7e;
+            border: 1.5px solid #e8c4b8;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.97);
+            background: rgba(232, 196, 184, 0.08);
+        }
+
+        /* Небольшая подпись внизу (можно удалить) */
+        .footer-text {
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 12px;
+            color: #d4c4bd;
+            padding: 16px 0 28px;
+            letter-spacing: 1px;
+            background: #FEF9F6;
+        }
+
+        /* ====== ЛЕГКАЯ АНИМАЦИЯ ПОЯВЛЕНИЯ ====== */
+        .container img {
+            opacity: 0;
+            animation: fadeIn 0.7s ease forwards;
+        }
+
+        .container img:nth-child(1) { animation-delay: 0.05s; }
+        .container img:nth-child(2) { animation-delay: 0.15s; }
+        .container img:nth-child(3) { animation-delay: 0.25s; }
+        .container img:nth-child(4) { animation-delay: 0.35s; }
+        .container img:nth-child(5) { animation-delay: 0.45s; }
+        .container img:nth-child(6) { animation-delay: 0.55s; }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Если у кого-то включен режим экономии энергии — убираем анимацию */
+        @media (prefers-reduced-motion: reduce) {
+            .container img {
+                opacity: 1;
+                animation: none;
+            }
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <!-- ВСТАВЛЯЙТЕ СВОИ КАРТИНКИ ТУТ -->
-        <img src="top.jpg" alt="Заголовок">
-        <img src="info.jpg" alt="Детали">
-        <img src="bottom.jpg" alt="Финал">
-        
-        <!-- Это место зарезервировано под будущие кнопки (например, "Подтвердить участие") -->
+
+        <!-- 
+            ═══════════════════════════════════════════════════
+            ⬇⬇⬇  ПОДСТАВЬТЕ СВОИ НАЗВАНИЯ ФАЙЛОВ  ⬇⬇⬇
+            ═══════════════════════════════════════════════════
+        -->
+        <img src="1.jpg" alt="Шапка приглашения">
+        <img src="2.jpg" alt="Имена и дата">
+        <img src="3.jpg" alt="Детали праздника">
+        <img src="4.jpg" alt="Программа">
+        <img src="5.jpg" alt="Место проведения">
+        <img src="6.jpg" alt="Финал">
+
+        <!-- ============ БЛОК ДЛЯ КНОПОК (пока скрыт) ============ -->
         <div class="actions">
-            <!-- Здесь позже появятся кнопки -->
+            <a href="#" class="btn-primary">✅ Подтвердить присутствие</a>
+            <a href="#" class="btn-secondary">📍 Открыть карту</a>
         </div>
+
+        <!-- Подпись внизу (можно удалить, если не нужно) -->
+        <div class="footer-text">С нетерпением ждём вас ❤️</div>
+
     </div>
+
 </body>
 </html>
